@@ -13,8 +13,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">                    
-                    @include('layouts._messages')                    
+                <div class="card-body">
+                    @include('layouts._messages')
                     @foreach ($questions as $question)
                     <div class="media">
                         <div class="d-flex flex-column counters">
@@ -32,9 +32,17 @@
                             <div class="d-flex align-items-center">
                                 <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
                                 <div class="ml-auto">
-                                    <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-outline-primary btn-sm">Edit</a>
+                                    <a href="{{ route('questions.edit', $question->id) }}"
+                                        class="btn btn-outline-primary btn-sm">Edit</a>
+                                    <form class="form-delete" method="post"
+                                        action="{{ route('questions.destroy', $question->id) }}">
+                                        @method("DELETE")
+                                        @csrf
+                                        <button type="submit" class="btn btn-outline-danger btn-sm"
+                                            onclick="return confirm('Are you sure you want to delete the question?')">Delete</button>
+                                    </form>
                                 </div>
-                            </div>                            
+                            </div>
                             <p class="lead">
                                 Asked by <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
                                 <small class="muted">{{ $question->created_date }}</small>
