@@ -18,7 +18,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="question-title">Question Title</label>
-                            <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" name="title" id="question-title">                            
+                            <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" value="{{ old('title') }}" name="title" id="question-title">                            
                             @if ($errors->has('title'))
                                 <div class="invalid-feedback">
                                     <strong>{{ $errors->first('title') }}</strong>
@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label for="question-body">Explain your question</label>
-                            <textarea class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="10" name="body" id="question-body"></textarea>
+                            <textarea class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="10" name="body" id="question-body">{{ old('body') }}</textarea>
                             @if ($errors->has('body'))
                                 <div class="invalid-feedback">
                                     <strong>{{ $errors->first('body') }}</strong>
