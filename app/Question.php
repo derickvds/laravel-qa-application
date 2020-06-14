@@ -10,7 +10,7 @@ class Question extends Model
 
     public function user() {
         return $this->belongsTo(User::class);
-    }    
+    }
 
     public function setTitleAttribute($value)
     {
@@ -46,7 +46,14 @@ class Question extends Model
         return \Parsedown::instance()->text($this->body);
     }
 
-    public function answers(){
+    public function answers()
+    {
         return $this->hasMany(Answer::class);
+    }
+
+    public function acceptBestAnswer(Answer $answer)
+    {
+        $this->best_answer_id = $answer->id;
+        $this->save();
     }
 }
